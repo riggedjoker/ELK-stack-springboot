@@ -1,0 +1,40 @@
+<Configuration status="WARN">
+    <Appenders>
+        <!-- Rolling File Appender -->
+        <RollingFile name="MyRollingFileAppender" fileName="/app/logs/logs.json"
+                     filePattern="/app/logs/logs-%d{yyyy-MM-dd}.json">
+            <JsonLayout
+                    compact="true"
+                    eventEol="true"
+                    includeStacktrace="true"
+                    includeException="true"
+                    includeNullDelimiter="false"
+                    includeMdc="true"
+                    includeNdc="true"
+                    includeLocation="true"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+
+        <!-- Console Appender (optional) -->
+        <Console name="MyConsoleAppender" target="SYSTEM_OUT">
+            <JsonLayout
+                    compact="true"
+                    eventEol="true"
+                    includeStacktrace="true"
+                    includeException="true"
+                    includeNullDelimiter="false"
+                    includeMdc="true"
+                    includeNdc="true"
+                    includeLocation="true"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="MyRollingFileAppender"/>
+            <AppenderRef ref="MyConsoleAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>
