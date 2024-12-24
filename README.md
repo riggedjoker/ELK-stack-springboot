@@ -52,7 +52,7 @@ services:
     container_name: logstash
     volumes:
       - ./logs:/usr/share/logstash/logs
-      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml // this is where you put your path for the logs and the config file
       - ./logstash/pipeline:/usr/share/logstash/pipeline
     ports:
       - "5044:5044"
@@ -104,7 +104,7 @@ docker-compose up --build --remove-orphans -d
 
 Choose the appropriate configuration for your log source (rolling file appender or socket appender).
 
-Example with Rolling File Appender:
+In this case, I went for Rolling File Appender:
 ```plaintext
 input {
   file {
@@ -126,6 +126,14 @@ output {
   }
   stdout { codec => rubydebug }
 }
+```
+For the pipeline, here is the config file (logstash.yml):
+```
+# logstash/config/logstash.yml
+
+http.host: "0.0.0.0"
+xpack.monitoring.elasticsearch.hosts: [ "http://elasticsearch:9200" ]
+
 ```
 
 ### 5. Kibana Setup
