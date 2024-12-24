@@ -24,7 +24,7 @@ First, clone the repository containing your project files:
 
 ```bash
 git clone git@github.com:riggedjoker/ELK-stack-springboot.git
-cd 
+cd ELK-stack-springboot
 ```
 
 ### 2. Docker Setup
